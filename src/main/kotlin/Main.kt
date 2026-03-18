@@ -1,6 +1,8 @@
 import java.io.PrintStream
 import services.CartService
+import services.InvoiceService
 import utils.Inventory
+
 
 fun main() {
     System.setOut(PrintStream(System.out, true, "UTF-8"))
@@ -106,8 +108,9 @@ fun main() {
                 if (CartService.getItems().isEmpty()) {
                     println("El carrito está vacío, no hay nada que confirmar.")
                 } else {
-                    // Pendiente de implementar confirmacion de compra y facturacion
-                    println("(Modulo en desarrollo: InvoiceService)")
+                    print("Ingrese el correo del cliente: ")
+                    val customerEmail = readln()
+                    InvoiceService.confirmPurchase(customerEmail)
                 }
             }
 

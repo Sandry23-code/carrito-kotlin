@@ -15,7 +15,7 @@ data class Invoice(
         get() = items.sumOf { it.subtotal }
 
     val tax: Double
-        get() = subtotal * 0.13
+        get() = subtotal * 0.13 // 13% de IVA (EL SALVADOR)
 
     val total: Double
         get() = subtotal + tax

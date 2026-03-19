@@ -56,6 +56,7 @@ object InvoiceService {
 
         val invoice = generateInvoice(customerEmail)
         printInvoice(invoice)
+        EmailService.sendInvoice(invoice)
         CartService.clear()
         println("Compra confirmada con éxito. El carrito ha sido vaciado.")
     }

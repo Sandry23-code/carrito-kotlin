@@ -4,6 +4,11 @@ import services.InvoiceService
 import utils.Inventory
 
 
+fun isValidEmail(email: String): Boolean {
+    val regex = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+    return regex.matches(email)
+}
+
 fun main() {
     System.setOut(PrintStream(System.out, true, "UTF-8"))
     System.setIn(System.`in`.buffered())
@@ -108,8 +113,14 @@ fun main() {
                 if (CartService.getItems().isEmpty()) {
                     println("El carrito está vacío, no hay nada que confirmar.")
                 } else {
-                    print("Ingrese el correo del cliente: ")
-                    val customerEmail = readln()
+                    var customerEmail: String
+                    do {
+                        print("Ingrese el correo del cliente: ")
+                        customerEmail = readln().trim()
+                        if (!isValidEmail(customerEmail)) {
+                            println("Correo inválido. Use el formato: usuario@dominio.com")
+                        }
+                    } while (!isValidEmail(customerEmail))
                     InvoiceService.confirmPurchase(customerEmail)
                 }
             }

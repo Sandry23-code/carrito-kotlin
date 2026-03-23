@@ -12,6 +12,7 @@ import javax.mail.Session
 import javax.mail.Transport
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
+import utils.AppLogger
 
 object EmailService {
 
@@ -20,24 +21,29 @@ object EmailService {
     private fun loadConfig(): Properties {
         val props = Properties()
         val configFile = File("email.properties")
+
         if (configFile.exists()) {
             FileInputStream(configFile).use { props.load(it) }
+            AppLogger.logger.info("Archivo email.properties cargado correctamente")
         } else {
             println("[AVISO] No se encontró 'email.properties' en la raíz del proyecto.")
             println("        Crea el archivo con los datos SMTP para activar el envío de correos.")
+            AppLogger.logger.warning("No se encontró email.properties en la raíz del proyecto")
         }
+
         return props
     }
 
-    private val smtpHost    get() = config.getProperty("smtp.host",     "smtp.gmail.com")
-    private val smtpPort    get() = config.getProperty("smtp.port",     "587")
-    private val senderEmail get() = config.getProperty("smtp.user",     "")
+    private val smtpHost    get() = config.getProperty("smtp.host", "smtp.gmail.com")
+    private val smtpPort    get() = config.getProperty("smtp.port", "587")
+    private val senderEmail get() = config.getProperty("smtp.user", "")
     private val senderPass  get() = config.getProperty("smtp.password", "")
 
     fun sendInvoice(invoice: Invoice) {
         if (senderEmail.isBlank() || senderPass.isBlank()) {
             println("\n[AVISO] Credenciales SMTP no configuradas en 'email.properties'.")
             println("        El correo NO fue enviado.")
+            AppLogger.logger.warning("Credenciales SMTP no configuradas en email.properties")
             return
         }
 
@@ -61,10 +67,18 @@ object EmailService {
                 subject = "Factura de Compra #${invoice.invoiceNumber}"
                 setText(buildEmailBody(invoice), "UTF-8")
             }
+
             Transport.send(message)
             println("\n[OK] Factura enviada correctamente a: ${invoice.customerEmail}")
+            AppLogger.logger.info("Factura enviada correctamente a: ${invoice.customerEmail}")
+
         } catch (e: MessagingException) {
             println("\n[ERROR] No se pudo enviar el correo: ${e.message}")
+            AppLogger.logger.severe("Error al enviar correo a ${invoice.customerEmail}: ${e.message}")
+
+        } catch (e: Exception) {
+            println("\n[ERROR] Ocurrió un error inesperado: ${e.message}")
+            AppLogger.logger.severe("Excepción inesperada en EmailService: ${e.message}")
         }
     }
 
@@ -79,6 +93,7 @@ object EmailService {
         sb.appendLine("----------------------------------------------")
         sb.appendLine("%-4s %-25s %8s %10s %12s".format("ID", "Producto", "Cant.", "P.Unit", "Subtotal"))
         sb.appendLine("-".repeat(65))
+
         invoice.items.forEach { item ->
             sb.appendLine(
                 "%-4d %-25s %8d %10.2f %12.2f".format(
@@ -90,6 +105,7 @@ object EmailService {
                 )
             )
         }
+
         sb.appendLine("-".repeat(65))
         sb.appendLine("%52s %12.2f".format("Subtotal:", invoice.subtotal))
         sb.appendLine("%52s %12.2f".format("IVA 13%:", invoice.tax))

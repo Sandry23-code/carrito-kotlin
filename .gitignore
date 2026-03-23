@@ -4,6 +4,12 @@ build/
 # Credenciales SMTP — NUNCA subir al repositorio
 email.properties
 
+# Logs: subir solo app.txt como evidencia
+logs/*
+!logs/
+!logs/app.txt
+*.lck
+
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

@@ -1,0 +1,9 @@
+# Configuración SMTP para envío de facturas
+# Copia este archivo como email.properties y rellena tus datos reales.
+# IMPORTANTE: nunca subas ese archivo a Git (Está en el .gitignore).
+
+smtp.host=HOST_NAME
+smtp.port=PUERTO
+smtp.user=TU_EMAIL
+smtp.password=PASSWORD
+

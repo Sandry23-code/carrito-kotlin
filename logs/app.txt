@@ -1,0 +1,34 @@
+mar 23, 2026 4:39:39 P. M. MainKt main
+INFO: Aplicación iniciada
+mar 23, 2026 4:40:02 P. M. MainKt main
+INFO: Producto agregado: Aceite vegetal (1 L), cantidad: 15
+mar 23, 2026 4:40:21 P. M. MainKt main
+INFO: Compra confirmada para correo: rachels.saenz@hotmail.com
+mar 23, 2026 4:40:21 P. M. services.EmailService loadConfig
+INFO: Archivo email.properties cargado correctamente
+mar 23, 2026 4:40:24 P. M. services.EmailService sendInvoice
+INFO: Factura enviada correctamente a: rachels.saenz@hotmail.com
+mar 23, 2026 4:41:16 P. M. MainKt main
+WARNING: Opción de menú inválida
+mar 23, 2026 4:41:16 P. M. MainKt main
+WARNING: Opción de menú inválida
+mar 23, 2026 4:41:16 P. M. MainKt main
+WARNING: Opción de menú inválida
+mar 23, 2026 4:41:17 P. M. MainKt main
+INFO: Aplicación iniciada
+mar 23, 2026 4:41:31 P. M. MainKt main
+INFO: Producto agregado: Huevos (cartón x12), cantidad: 5
+mar 23, 2026 4:41:50 P. M. MainKt main
+INFO: Compra confirmada para correo: rachels.saenz@hotmail.com
+mar 23, 2026 4:41:50 P. M. services.EmailService loadConfig
+INFO: Archivo email.properties cargado correctamente
+mar 23, 2026 4:41:52 P. M. services.EmailService sendInvoice
+INFO: Factura enviada correctamente a: rachels.saenz@hotmail.com
+mar 23, 2026 4:42:07 P. M. MainKt main
+WARNING: Opción de menú inválida
+mar 23, 2026 4:42:07 P. M. MainKt main
+WARNING: Opción de menú inválida
+mar 23, 2026 4:42:07 P. M. MainKt main
+WARNING: Opción de menú inválida
+mar 23, 2026 4:42:07 P. M. MainKt main
+WARNING: Opción de menú inválida
